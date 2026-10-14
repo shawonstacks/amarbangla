@@ -183,7 +183,7 @@ function generateResultCard() {
       topDesc = `"${matchedBadge.desc}"`;
     } else {
       topTitle = "বাংলা অভিজ্ঞতা 🎯";
-      topDesc = `"আপনার অনন্য বাংলা স্মৃতি ও পছন্দের সংকলন তৈরি হয়েছে!"`;
+      topDesc = `"আপনার অনন্য বাংলা স্মৃতি ও পছন্দের সংকলন তৈরি হয়েছে!"`;
     }
   }
 
@@ -193,9 +193,10 @@ function generateResultCard() {
 
   if (uploadedPhotoDataUrl && avatarContainer && cardUserPhoto) {
     cardUserPhoto.src = uploadedPhotoDataUrl;
-    avatarContainer.classList.remove('hidden');
+    avatarContainer.style.display = 'block';
+    avatarContainer.style.textAlign = 'center';
   } else if (avatarContainer) {
-    avatarContainer.classList.add('hidden');
+    avatarContainer.style.display = 'none';
   }
 
   const elUserName = document.getElementById('card-user-name');
@@ -208,15 +209,16 @@ function generateResultCard() {
   if (elScoreText) elScoreText.innerText = topScoreText;
   if (elBadgeDesc) elBadgeDesc.innerText = topDesc;
 
+  // Breakdown List with flex & shrink protection
   const breakdownContainer = document.getElementById('category-breakdown-list');
   if (breakdownContainer) {
-    breakdownContainer.innerHTML = '<p class="font-bold border-b border-slate-200/80 pb-1.5 mb-2 text-emerald-800">সকল ক্যাটাগরির মার্কস:</p>';
+    breakdownContainer.innerHTML = '<p style="font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 8px; color: #065f46; text-align: left;">সকল ক্যাটাগরির মার্কস:</p>';
     
     categoryResults.forEach(res => {
       breakdownContainer.innerHTML += `
-        <div class="flex justify-between items-center py-0.5">
-          <span class="text-slate-700 font-medium">${res.title}</span>
-          <span class="font-extrabold text-emerald-700">${res.count}/${res.total} (${res.percentage}%)</span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; width: 100%; gap: 8px;">
+          <span style="color: #334155; font-weight: 500; text-align: left; flex: 1; min-width: 0; word-break: break-word; line-height: 1.3;">${res.title}</span>
+          <span style="font-weight: 800; color: #047857; text-align: right; flex-shrink: 0; white-space: nowrap; line-height: 1.3;">${res.count}/${res.total} (${res.percentage}%)</span>
         </div>
       `;
     });
@@ -236,11 +238,33 @@ function downloadCardImage() {
   const cardElement = document.getElementById('shareable-card');
   if (!cardElement) return;
 
+  window.scrollTo(0, 0);
+
   html2canvas(cardElement, { 
     scale: 3, 
     useCORS: true,
     logging: false,
-    letterRendering: true
+    letterRendering: true,
+    backgroundColor: "#FAF9F6",
+    onclone: (clonedDoc) => {
+      const clonedCard = clonedDoc.getElementById('shareable-card');
+      if (clonedCard) {
+        clonedCard.style.maxWidth = '420px';
+        clonedCard.style.width = '100%';
+        clonedCard.style.marginLeft = 'auto';
+        clonedCard.style.marginRight = 'auto';
+        clonedCard.style.textAlign = 'center';
+        clonedCard.style.boxSizing = 'border-box';
+
+        const childContainers = clonedCard.querySelectorAll('div');
+        childContainers.forEach(div => {
+          if (div.id !== 'category-breakdown-list') {
+            div.style.textAlign = 'center';
+            div.style.width = '100%';
+          }
+        });
+      }
+    }
   }).then(canvas => {
     const link = document.createElement('a');
     link.download = `my-amar-bangla-card.png`;
