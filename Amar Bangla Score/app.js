@@ -17,7 +17,6 @@ const allCategories = [
 window.addEventListener('DOMContentLoaded', () => {
   renderAllCategories();
   
-  // Dynamic Year in Footer
   const yearEl = document.getElementById('current-year');
   if (yearEl) {
     yearEl.innerText = new Date().getFullYear();
@@ -32,7 +31,6 @@ function handlePhotoUpload(event) {
   reader.onload = function(e) {
     uploadedPhotoDataUrl = e.target.result;
     
-    // Preview in input section
     const previewImg = document.getElementById('photo-preview-input');
     const placeholderIcon = document.getElementById('photo-placeholder-icon');
     
@@ -187,16 +185,16 @@ function generateResultCard() {
     }
   }
 
-  // Handle Photo Avatar in Card
+  // Handle Photo Avatar Display (Hide completely if no uploaded photo)
   const avatarContainer = document.getElementById('card-avatar-container');
   const cardUserPhoto = document.getElementById('card-user-photo');
 
   if (uploadedPhotoDataUrl && avatarContainer && cardUserPhoto) {
-    cardUserPhoto.src = uploadedPhotoDataUrl;
-    avatarContainer.style.display = 'block';
-    avatarContainer.style.textAlign = 'center';
+    cardUserPhoto.setAttribute('src', uploadedPhotoDataUrl);
+    avatarContainer.style.setProperty('display', 'block', 'important');
   } else if (avatarContainer) {
-    avatarContainer.style.display = 'none';
+    avatarContainer.style.setProperty('display', 'none', 'important');
+    if (cardUserPhoto) cardUserPhoto.removeAttribute('src');
   }
 
   const elUserName = document.getElementById('card-user-name');
@@ -209,16 +207,16 @@ function generateResultCard() {
   if (elScoreText) elScoreText.innerText = topScoreText;
   if (elBadgeDesc) elBadgeDesc.innerText = topDesc;
 
-  // Breakdown List with flex & shrink protection
+  // Breakdown List
   const breakdownContainer = document.getElementById('category-breakdown-list');
   if (breakdownContainer) {
-    breakdownContainer.innerHTML = '<p style="font-weight: bold; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 8px; color: #065f46; text-align: left;">সকল ক্যাটাগরির মার্কস:</p>';
+    breakdownContainer.innerHTML = '<p style="font-weight: bold; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; margin-bottom: 6px; color: #065f46; text-align: left; font-size: 11px; letter-spacing: 0;">সকল ক্যাটাগরির মার্কস:</p>';
     
     categoryResults.forEach(res => {
       breakdownContainer.innerHTML += `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; width: 100%; gap: 8px;">
-          <span style="color: #334155; font-weight: 500; text-align: left; flex: 1; min-width: 0; word-break: break-word; line-height: 1.3;">${res.title}</span>
-          <span style="font-weight: 800; color: #047857; text-align: right; flex-shrink: 0; white-space: nowrap; line-height: 1.3;">${res.count}/${res.total} (${res.percentage}%)</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 2.5px 0; width: 100%; gap: 6px;">
+          <span style="color: #334155; font-weight: 500; text-align: left; flex: 1; min-width: 0; word-break: break-word; line-height: 1.25; font-size: 11px; letter-spacing: 0;">${res.title}</span>
+          <span style="font-weight: 800; color: #047857; text-align: right; flex-shrink: 0; white-space: nowrap; font-size: 11px; letter-spacing: 0;">${res.count}/${res.total} (${res.percentage}%)</span>
         </div>
       `;
     });
@@ -234,35 +232,58 @@ function generateResultCard() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function downloadCardImage() {
+async function downloadCardImage() {
   const cardElement = document.getElementById('shareable-card');
   if (!cardElement) return;
+
+  const cardUserPhoto = document.getElementById('card-user-photo');
+  const avatarContainer = document.getElementById('card-avatar-container');
+
+  if (uploadedPhotoDataUrl && cardUserPhoto && avatarContainer) {
+    cardUserPhoto.src = uploadedPhotoDataUrl;
+    avatarContainer.style.setProperty('display', 'block', 'important');
+
+    await new Promise((resolve) => {
+      if (cardUserPhoto.complete && cardUserPhoto.naturalWidth !== 0) {
+        resolve();
+      } else {
+        cardUserPhoto.onload = resolve;
+        cardUserPhoto.onerror = resolve;
+      }
+    });
+  } else if (avatarContainer) {
+    avatarContainer.style.setProperty('display', 'none', 'important');
+  }
 
   window.scrollTo(0, 0);
 
   html2canvas(cardElement, { 
     scale: 3, 
     useCORS: true,
+    allowTaint: true,
     logging: false,
     letterRendering: true,
     backgroundColor: "#FAF9F6",
     onclone: (clonedDoc) => {
       const clonedCard = clonedDoc.getElementById('shareable-card');
+      const clonedPhoto = clonedDoc.getElementById('card-user-photo');
+      const clonedAvatarContainer = clonedDoc.getElementById('card-avatar-container');
+
       if (clonedCard) {
-        clonedCard.style.maxWidth = '420px';
+        clonedCard.style.maxWidth = '380px';
         clonedCard.style.width = '100%';
         clonedCard.style.marginLeft = 'auto';
         clonedCard.style.marginRight = 'auto';
         clonedCard.style.textAlign = 'center';
         clonedCard.style.boxSizing = 'border-box';
+      }
 
-        const childContainers = clonedCard.querySelectorAll('div');
-        childContainers.forEach(div => {
-          if (div.id !== 'category-breakdown-list') {
-            div.style.textAlign = 'center';
-            div.style.width = '100%';
-          }
-        });
+      if (uploadedPhotoDataUrl && clonedPhoto && clonedAvatarContainer) {
+        clonedAvatarContainer.style.setProperty('display', 'block', 'important');
+        clonedPhoto.setAttribute('src', uploadedPhotoDataUrl);
+      } else if (clonedAvatarContainer) {
+        clonedAvatarContainer.style.setProperty('display', 'none', 'important');
+        if (clonedPhoto) clonedPhoto.removeAttribute('src');
       }
     }
   }).then(canvas => {
