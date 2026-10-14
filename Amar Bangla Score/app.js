@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// High Resolution Photo Handler for Crisp Quality
 function handlePhotoUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -34,14 +35,15 @@ function handlePhotoUpload(event) {
       const ctx = canvas.getContext('2d');
       
       let size = Math.min(img.width, img.height);
-      canvas.width = 300;
-      canvas.height = 300;
+      // Increased canvas size to 900x900 for ultra-sharp high-res output
+      canvas.width = 900;
+      canvas.height = 900;
       
       let startX = (img.width - size) / 2;
       let startY = (img.height - size) / 2;
       
-      ctx.drawImage(img, startX, startY, size, size, 0, 0, 300, 300);
-      uploadedPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      ctx.drawImage(img, startX, startY, size, size, 0, 0, 900, 900);
+      uploadedPhotoDataUrl = canvas.toDataURL('image/jpeg', 1.0);
       
       const previewImg = document.getElementById('photo-preview-input');
       const placeholderIcon = document.getElementById('photo-placeholder-icon');
@@ -199,7 +201,6 @@ function generateResultCard() {
     }
   }
 
-  // Handle Photo Avatar Background Display
   const avatarContainer = document.getElementById('card-avatar-container');
   const cardUserPhotoBg = document.getElementById('card-user-photo-bg');
 
@@ -221,7 +222,6 @@ function generateResultCard() {
   if (elScoreText) elScoreText.innerText = topScoreText;
   if (elBadgeDesc) elBadgeDesc.innerText = topDesc;
 
-  // Breakdown List
   const breakdownContainer = document.getElementById('category-breakdown-list');
   if (breakdownContainer) {
     breakdownContainer.innerHTML = '<p style="font-weight: bold; border-bottom: 1px solid #f1f5f9; padding-bottom: 4px; margin-bottom: 6px; color: #065f46; text-align: left; font-size: 11px; letter-spacing: 0;">সকল ক্যাটাগরির মার্কস:</p>';
@@ -316,7 +316,7 @@ function resetApp() {
   selectedItems.clear();
   uploadedPhotoDataUrl = null;
   
-  const userNameInput = document.getElementById('user-name');
+  .userNameInput = document.getElementById('user-name');
   const userPhotoInput = document.getElementById('user-photo-input');
   if (userNameInput) userNameInput.value = '';
   if (userPhotoInput) userPhotoInput.value = '';
