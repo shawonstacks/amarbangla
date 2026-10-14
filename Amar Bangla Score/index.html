@@ -54,30 +54,30 @@
 
   <main class="max-w-4xl mx-auto px-4 py-6 w-full flex-grow">
 
- <!-- Hero Banner with Background Image Slider -->
-<section id="hero-section" class="relative rounded-3xl overflow-hidden mb-8 shadow-xl bg-slate-900">
-  
-  <!-- Background Image & Gradient Layer -->
-  <div class="relative w-full min-h-[280px] sm:min-h-[320px] flex items-center bg-cover bg-center p-6 sm:p-10"
-       style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.3)), url('images/amarbangla.jpg');">
-    
-    <!-- Content Layer -->
-    <div class="relative z-10 max-w-2xl text-white">
-      <span class="inline-block px-3.5 py-1 bg-emerald-500/30 backdrop-blur-md border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold rounded-full mb-3">
-         শৈশব ও সংস্কৃতি
-      </span>
+    <!-- Hero Banner with Background Image Slider -->
+    <section id="hero-section" class="relative rounded-3xl overflow-hidden mb-8 shadow-xl bg-slate-900">
       
-      <h2 class="text-2xl sm:text-4xl font-black text-white tracking-wide mb-2 drop-shadow-md">
-        নস্টালজিক স্মৃতি ও গ্রামবাংলার কালচার
-      </h2>
-      
-      <p class="text-xs sm:text-sm text-slate-200 font-medium drop-shadow">
+      <!-- Background Image & Gradient Layer -->
+      <div class="relative w-full min-h-[280px] sm:min-h-[320px] flex items-center bg-cover bg-center p-6 sm:p-10"
+           style="background-image: linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.3)), url('images/amarbangla.jpg');">
         
-      </p>
-    </div>
+        <!-- Content Layer -->
+        <div class="relative z-10 max-w-2xl text-white">
+          <span class="inline-block px-3.5 py-1 bg-emerald-500/30 backdrop-blur-md border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold rounded-full mb-3">
+             শৈশব ও সংস্কৃতি
+          </span>
+          
+          <h2 class="text-2xl sm:text-4xl font-black text-white tracking-wide mb-2 drop-shadow-md">
+            নস্টালজিক স্মৃতি ও গ্রামবাংলার কালচার
+          </h2>
+          
+          <p class="text-xs sm:text-sm text-slate-200 font-medium drop-shadow">
+           স্মৃতি ট্র্যাকার
+          </p>
+        </div>
 
-  </div>
-</section>
+      </div>
+    </section>
 
     <!-- Checklist Section -->
     <div id="checklist-section" class="space-y-6">
@@ -100,7 +100,7 @@
 
         <div class="w-full">
           <label class="block text-xs font-bold text-slate-700 mb-1.5">আপনার নাম লিখুন (কার্ডে দেখাবে):</label>
-          <input type="text" id="user-name" placeholder="যেমন: মেহেদী হাসান" class="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
+          <input type="text" id="user-name" placeholder= class="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
         </div>
 
         <button onclick="generateResultCard()" class="w-full sm:w-auto shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.3)] hover:shadow-[0_6px_25px_rgba(5,150,105,0.4)] transition-all transform active:scale-95 text-sm">
@@ -124,61 +124,67 @@
 
     <!-- Result Section -->
     <div id="result-section" class="hidden space-y-6">
-      
-      <div class="text-center">
-        <button onclick="resetApp()" class="text-xs bg-slate-200/80 hover:bg-slate-300 text-slate-700 font-bold px-4 py-2 rounded-xl transition-all">
-          ↺ আবার নতুন করে সিলেক্ট করুন
-        </button>
-      </div>
 
-      <div id="shareable-card" class="bg-[#FAF9F6] text-slate-800 p-6 sm:p-8 rounded-[32px] shadow-[0_20px_50px_rgba(5,150,105,0.12)] border-2 border-emerald-500/20 max-w-md mx-auto relative overflow-hidden">
+      <!-- Shareable Result Card -->
+      <div id="shareable-card" style="background-color: #FAF9F6; color: #1e293b; padding: 28px 24px; border-radius: 32px; box-shadow: 0 20px 50px rgba(5,150,105,0.12); border: 2px solid rgba(5,150,105,0.25); max-width: 420px; width: 100%; margin: 0 auto; box-sizing: border-box; text-align: center; position: relative;">
         
-        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -left-12 -top-12 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Header Text (No Pill Background) -->
+        <div style="width: 100%; text-align: center; margin-bottom: 18px; display: block;">
+          <span style="color: #065f46; font-size: 13px; font-weight: 800; letter-spacing: 0.05em; text-align: center; display: inline-block;">
+            আমার বাংলা • কার্ড
+          </span>
+        </div>
 
-        <div class="relative z-10 text-center space-y-4">
-          
-          <div class="flex justify-center items-center w-full">
-            <div class="inline-flex items-center justify-center bg-emerald-100/80 border border-emerald-300/80 text-emerald-800 px-4 py-1.5 rounded-full text-xs font-bold leading-none text-center shadow-sm">
-              <span>আমার বাংলা • কার্ড</span>
-            </div>
+        <!-- User Photo Avatar Wrapper -->
+        <div id="card-avatar-container" style="display: none; width: 100%; text-align: center; margin-bottom: 16px;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #ecfdf5; border: 2.5px solid #059669; overflow: hidden; margin: 0 auto; display: inline-block;">
+            <img id="card-user-photo" src="" alt="User Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
+        </div>
 
-          <div class="flex justify-center">
-            <div id="card-avatar-container" class="w-20 h-20 rounded-full bg-emerald-50 border-2 border-emerald-500 overflow-hidden shadow-md flex items-center justify-center hidden">
-              <img id="card-user-photo" src="" alt="User Photo" class="w-full h-full object-cover">
-            </div>
-          </div>
+        <!-- User Name & Main Title Wrapper -->
+        <div style="width: 100%; text-align: center; margin-bottom: 18px; display: block;">
+          <h2 id="card-user-name" style="font-size: 26px; font-weight: 900; color: #0f172a; margin: 0 0 4px 0; text-align: center; line-height: 1.2; width: 100%;">
+            অজ্ঞাতনামা অভিযাত্রী
+          </h2>
+          <p id="card-top-category" style="font-size: 16px; font-weight: 800; color: #047857; margin: 0; text-align: center; width: 100%;">
+            নতুন অভিযাত্রী 🧭
+          </p>
+        </div>
 
-          <div class="space-y-1">
-            <h2 id="card-user-name" class="text-2xl font-black text-slate-900 tracking-tight">অজ্ঞাতনামা অভিযাত্রী</h2>
-            <p id="card-top-category" class="text-base font-extrabold text-emerald-700">দেশি কালচারাল গুরু</p>
-          </div>
+        <!-- Main Score & Quote Box -->
+        <div style="background-color: #ffffff; border: 1px solid #a7f3d0; border-radius: 18px; padding: 16px; margin-bottom: 20px; text-align: center; width: 100%; box-sizing: border-box; display: block;">
+          <p id="card-score-text" style="font-size: 13px; font-weight: bold; color: #047857; margin: 0 0 6px 0; text-align: center; width: 100%;">
+            এখনো কোনো স্মৃতি সিলেক্ট করেননি!
+          </p>
+          <p id="card-badge-desc" style="font-size: 12px; font-style: italic; color: #475569; margin: 0 auto; text-align: center; line-height: 1.4; max-width: 300px; width: 100%;">
+            "তালিকা থেকে আপনার পছন্দের স্মৃতিগুলোতে টিক চিহ্ন দিন এবং আপনার আসল নস্টালজিয়া কার্ডটি আনলক করুন!"
+          </p>
+        </div>
 
-          <div class="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-emerald-100 shadow-sm space-y-1.5">
-            <p id="card-score-text" class="text-xs font-bold text-emerald-700">প্রধান ঝোঁক: সিনেমা ও নাটক</p>
-            <p id="card-badge-desc" class="text-xs italic text-slate-600 leading-relaxed">"আপনার অভিজ্ঞতা অনন্য!"</p>
-          </div>
+        <!-- Category Breakdown List -->
+        <div id="category-breakdown-list" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px; margin-bottom: 20px; text-align: left; width: 100%; box-sizing: border-box;">
+          <!-- Dynamic Category Marks Rendered Here -->
+        </div>
 
-          <div id="category-breakdown-list" class="text-left text-xs bg-white/80 p-4 rounded-2xl space-y-2 border border-slate-200/80 shadow-sm">
-            <!-- Dynamic Breakdown -->
-          </div>
-
-          <div class="pt-3 border-t border-slate-200/80 flex justify-between items-center text-[10px] font-bold text-slate-500">
-            <span class="tracking-wider text-emerald-800">AMAR BANGLA</span>
-            <span class="text-slate-400">amarbanglascore.vercel.app</span>
-          </div>
-
+        <!-- Footer Branding -->
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; width: 100%; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+          <span style="font-size: 10px; font-weight: bold; color: #065f46; letter-spacing: 0.05em; text-align: left;">AMAR BANGLA</span>
+          <span style="font-size: 10px; font-weight: bold; color: #94a3b8; text-align: right;">www.amarbanglascore.vercel.app</span>
         </div>
 
       </div>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
-        <button onclick="downloadCardImage()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.3)] transition-all text-sm flex items-center justify-center gap-2">
-          📥 কার্ড ডাউনলোড করুন
+      <!-- Option 1: Clean Action Buttons Below Card -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
+        <button onclick="downloadCardImage()" class="w-full sm:w-auto flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-5 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.25)] transition-all text-xs sm:text-sm flex items-center justify-center gap-2">
+          📥 কার্ড ডাউনলোড
         </button>
-        <button onclick="shareToFacebook()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-2xl shadow-[0_4px_20px_rgba(37,99,235,0.3)] transition-all text-sm flex items-center justify-center gap-2">
-          📘 ফেইসবুকে শেয়ার করুন
+        <button onclick="shareToFacebook()" class="w-full sm:w-auto flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-5 rounded-2xl shadow-[0_4px_20px_rgba(37,99,235,0.25)] transition-all text-xs sm:text-sm flex items-center justify-center gap-2">
+          📘 ফেইসবুকে শেয়ার
+        </button>
+        <button onclick="resetApp()" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 px-5 rounded-2xl border border-slate-200 transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 shrink-0">
+          ↺ নতুন করে নির্বাচন
         </button>
       </div>
 
@@ -224,7 +230,7 @@
       <div class="border-t border-slate-100 my-6"></div>
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-        <p>© <span>2026</span> আমার বাংলা।</p>
+        <p>© <span id="current-year">2026</span> আমার বাংলা।</p>
         <p class="text-center font-medium"><span class="font-bold text-emerald-700">মেহেদী হাসান</span></p>
         <div class="flex items-center gap-4 font-medium">
           <a href="#" onclick="alert('আমার বাংলা একটি বিনোদনমূলক ওয়েব প্রজেক্ট। এতে আপনার কোনো ব্যক্তিগত তথ্য সংরক্ষণ করা হয় না।'); return false;" class="hover:text-emerald-600 transition">প্রাইভেসি পলিসি</a>
