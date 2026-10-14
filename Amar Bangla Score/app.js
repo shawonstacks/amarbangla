@@ -35,7 +35,6 @@ function handlePhotoUpload(event) {
       const ctx = canvas.getContext('2d');
       
       let size = Math.min(img.width, img.height);
-      // Increased canvas size to 900x900 for ultra-sharp high-res output
       canvas.width = 900;
       canvas.height = 900;
       
@@ -316,7 +315,7 @@ function resetApp() {
   selectedItems.clear();
   uploadedPhotoDataUrl = null;
   
-  .userNameInput = document.getElementById('user-name');
+  const userNameInput = document.getElementById('user-name');
   const userPhotoInput = document.getElementById('user-photo-input');
   if (userNameInput) userNameInput.value = '';
   if (userPhotoInput) userPhotoInput.value = '';
