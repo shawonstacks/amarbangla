@@ -19,7 +19,7 @@
 
   <!-- Header with Navigation Links & Action Button -->
   <header class="bg-white/90 backdrop-blur-md border-b border-emerald-900/10 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
       
       <!-- Logo & Title -->
       <div class="flex items-center gap-3">
@@ -72,7 +72,7 @@
           </h2>
           
           <p class="text-xs sm:text-sm text-slate-200 font-medium drop-shadow">
-           স্মৃতি ট্র্যাকার
+            লাটিম, বায়োস্কোপ, নদীর ঝাঁপ আর কাদার মাঠের স্মৃতি ট্র্যাকার
           </p>
         </div>
 
@@ -100,7 +100,7 @@
 
         <div class="w-full">
           <label class="block text-xs font-bold text-slate-700 mb-1.5">আপনার নাম লিখুন (কার্ডে দেখাবে):</label>
-          <input type="text" id="user-name" placeholder="নাম:" class="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
+          <input type="text" id="user-name" placeholder="যেমন: মেহেদী হাসান" class="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all">
         </div>
 
         <button onclick="generateResultCard()" class="w-full sm:w-auto shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3 px-6 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.3)] hover:shadow-[0_6px_25px_rgba(5,150,105,0.4)] transition-all transform active:scale-95 text-sm">
@@ -125,65 +125,65 @@
     <!-- Result Section -->
     <div id="result-section" class="hidden space-y-6">
 
-      <!-- Shareable Result Card -->
-      <div id="shareable-card" style="background-color: #FAF9F6; color: #1e293b; padding: 28px 24px; border-radius: 32px; box-shadow: 0 20px 50px rgba(5,150,105,0.12); border: 2px solid rgba(5,150,105,0.25); max-width: 420px; width: 100%; margin: 0 auto; box-sizing: border-box; text-align: center; position: relative;">
+      <!-- Compact & Social-Ready Result Card -->
+      <div id="shareable-card" style="background-color: #FAF9F6; color: #1e293b; padding: 20px 20px 16px 20px; border-radius: 28px; box-shadow: 0 15px 35px rgba(5,150,105,0.1); border: 2px solid rgba(5,150,105,0.2); max-width: 380px; width: 100%; margin: 0 auto; box-sizing: border-box; text-align: center; position: relative;">
         
-        <!-- Header Text (No Pill Background) -->
-        <div style="width: 100%; text-align: center; margin-bottom: 18px; display: block;">
-          <span style="color: #065f46; font-size: 13px; font-weight: 800; letter-spacing: 0.05em; text-align: center; display: inline-block;">
+        <!-- Header Title -->
+        <div style="width: 100%; text-align: center; margin-bottom: 12px; display: block;">
+          <span style="color: #065f46; font-size: 13px; font-weight: 800; letter-spacing: 0; text-align: center; display: inline-block;">
             আমার বাংলা • কার্ড
           </span>
         </div>
 
-        <!-- User Photo Avatar Wrapper -->
-        <div id="card-avatar-container" style="display: none; width: 100%; text-align: center; margin-bottom: 16px;">
-          <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #ecfdf5; border: 2.5px solid #059669; overflow: hidden; margin: 0 auto; display: inline-block;">
+        <!-- User Photo Avatar (Square Frame, hidden by default) -->
+        <div id="card-avatar-container" style="display: none; width: 100%; text-align: center; margin-bottom: 14px;">
+          <div style="width: 80px; height: 80px; border-radius: 18px; background-color: #ecfdf5; border: 2.5px solid #059669; overflow: hidden; margin: 0 auto; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
             <img id="card-user-photo" src="" alt="User Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
         </div>
 
-        <!-- User Name & Main Title Wrapper -->
-        <div style="width: 100%; text-align: center; margin-bottom: 18px; display: block;">
-          <h2 id="card-user-name" style="font-size: 26px; font-weight: 900; color: #0f172a; margin: 0 0 4px 0; text-align: center; line-height: 1.2; width: 100%;">
+        <!-- User Name & Main Title -->
+        <div style="width: 100%; text-align: center; margin-bottom: 12px; display: block;">
+          <h2 id="card-user-name" style="font-size: 24px; font-weight: 900; color: #0f172a; margin: 0 0 2px 0; text-align: center; line-height: 1.2; width: 100%; letter-spacing: 0;">
             অজ্ঞাতনামা অভিযাত্রী
           </h2>
-          <p id="card-top-category" style="font-size: 16px; font-weight: 800; color: #047857; margin: 0; text-align: center; width: 100%;">
+          <p id="card-top-category" style="font-size: 15px; font-weight: 800; color: #047857; margin: 0; text-align: center; width: 100%; letter-spacing: 0;">
             নতুন অভিযাত্রী 🧭
           </p>
         </div>
 
         <!-- Main Score & Quote Box -->
-        <div style="background-color: #ffffff; border: 1px solid #a7f3d0; border-radius: 18px; padding: 16px; margin-bottom: 20px; text-align: center; width: 100%; box-sizing: border-box; display: block;">
-          <p id="card-score-text" style="font-size: 13px; font-weight: bold; color: #047857; margin: 0 0 6px 0; text-align: center; width: 100%;">
+        <div style="background-color: #ffffff; border: 1px solid #a7f3d0; border-radius: 14px; padding: 12px; margin-bottom: 14px; text-align: center; width: 100%; box-sizing: border-box; display: block;">
+          <p id="card-score-text" style="font-size: 12px; font-weight: bold; color: #047857; margin: 0 0 4px 0; text-align: center; width: 100%; letter-spacing: 0;">
             এখনো কোনো স্মৃতি সিলেক্ট করেননি!
           </p>
-          <p id="card-badge-desc" style="font-size: 12px; font-style: italic; color: #475569; margin: 0 auto; text-align: center; line-height: 1.4; max-width: 300px; width: 100%;">
+          <p id="card-badge-desc" style="font-size: 11px; font-style: italic; color: #475569; margin: 0 auto; text-align: center; line-height: 1.35; max-width: 300px; width: 100%; letter-spacing: 0;">
             "তালিকা থেকে আপনার পছন্দের স্মৃতিগুলোতে টিক চিহ্ন দিন এবং আপনার আসল নস্টালজিয়া কার্ডটি আনলক করুন!"
           </p>
         </div>
 
         <!-- Category Breakdown List -->
-        <div id="category-breakdown-list" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px; margin-bottom: 20px; text-align: left; width: 100%; box-sizing: border-box;">
+        <div id="category-breakdown-list" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px; margin-bottom: 14px; text-align: left; width: 100%; box-sizing: border-box;">
           <!-- Dynamic Category Marks Rendered Here -->
         </div>
 
         <!-- Footer Branding -->
-        <div style="border-top: 1px solid #cbd5e1; padding-top: 12px; width: 100%; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
-          <span style="font-size: 10px; font-weight: bold; color: #065f46; letter-spacing: 0.05em; text-align: left;">AMAR BANGLA</span>
-          <span style="font-size: 10px; font-weight: bold; color: #94a3b8; text-align: right;">www.amarbanglascore.vercel.app</span>
+        <div style="border-top: 1px solid #cbd5e1; padding-top: 10px; width: 100%; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+          <span style="font-size: 10px; font-weight: bold; color: #065f46; text-align: left; letter-spacing: 0;">AMAR BANGLA</span>
+          <span style="font-size: 9px; font-weight: 600; color: #64748b; text-align: right; letter-spacing: 0;">www.amarbanglascore.vercel.app</span>
         </div>
 
       </div>
 
-      <!-- Option 1: Clean Action Buttons Below Card -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto pt-2">
-        <button onclick="downloadCardImage()" class="w-full sm:w-auto flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-5 rounded-2xl shadow-[0_4px_20px_rgba(5,150,105,0.25)] transition-all text-xs sm:text-sm flex items-center justify-center gap-2">
+      <!-- Action Buttons Below Card -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 max-w-sm mx-auto pt-2">
+        <button onclick="downloadCardImage()" class="w-full sm:w-auto flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-[0_4px_20px_rgba(5,150,105,0.2)] transition-all text-xs flex items-center justify-center gap-2">
           📥 কার্ড ডাউনলোড
         </button>
-        <button onclick="shareToFacebook()" class="w-full sm:w-auto flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-5 rounded-2xl shadow-[0_4px_20px_rgba(37,99,235,0.25)] transition-all text-xs sm:text-sm flex items-center justify-center gap-2">
+        <button onclick="shareToFacebook()" class="w-full sm:w-auto flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-[0_4px_20px_rgba(37,99,235,0.2)] transition-all text-xs flex items-center justify-center gap-2">
           📘 ফেইসবুকে শেয়ার
         </button>
-        <button onclick="resetApp()" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 px-5 rounded-2xl border border-slate-200 transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 shrink-0">
+        <button onclick="resetApp()" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-xl border border-slate-200 transition-all text-xs flex items-center justify-center gap-1.5 shrink-0">
           ↺ নতুন করে নির্বাচন
         </button>
       </div>
@@ -195,7 +195,6 @@
   <!-- Footer -->
   <footer class="mt-16 border-t border-slate-200/80 bg-white/90 backdrop-blur-md pt-10 pb-8 text-slate-600">
     <div class="max-w-4xl mx-auto px-4">
-      
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <div class="space-y-3">
           <div class="flex items-center gap-2">
@@ -203,26 +202,26 @@
             <h3 class="font-extrabold text-lg text-slate-900">আমার বাংলা</h3>
           </div>
           <p class="text-xs text-slate-500 leading-relaxed">
-            বাঙালি শৈশব, দেশের সিগনেচার খাবার, হাই স্কুল মেমোরিজ ও দেশি পপ-কালচার ট্র্যাকার। আপনার অভিজ্ঞতা কত পারসেন্ট বাঙালির সাথে মেলে—তা যাচাই করুন এক ক্লিকেই!
+            বাঙালি শৈশব, দেশের সিগনেচার খাবার, হাই স্কুল মেমোরিজ ও দেশি পপ-কালচার ট্র্যাকার।
           </p>
         </div>
 
         <div class="space-y-2">
           <h4 class="font-bold text-sm text-slate-800 border-b border-slate-100 pb-1.5">ক্যাটাগরি সমূহ</h4>
           <ul class="text-xs space-y-1.5 text-slate-600">
-            <li class="flex items-center gap-1.5">🎬 সিনেমা, নাটক ও ওটিটি</li>
-            <li class="flex items-center gap-1.5">🍲 দেশি ফুডি ও ভোজনরসিক</li>
-            <li class="flex items-center gap-1.5">📺 শৈশব, গ্রামবাংলা ও বিটিভি নস্টালজিয়া</li>
-            <li class="flex items-center gap-1.5">🎒 হাই স্কুল ও স্কুল লাইফ</li>
+            <li>🎬 সিনেমা, নাটক ও ওটিটি</li>
+            <li>🍲 দেশি ফুডি ও ভোজনরসিক</li>
+            <li>📺 শৈশব, গ্রামবাংলা ও বিটিভি নস্টালজিয়া</li>
+            <li>🎒 হাই স্কুল ও স্কুল লাইফ</li>
           </ul>
         </div>
 
         <div class="space-y-2">
           <h4 class="font-bold text-sm text-slate-800 border-b border-slate-100 pb-1.5">কীভাবে কাজ করে?</h4>
           <ol class="text-xs space-y-1.5 text-slate-600 list-decimal list-inside">
-            <li>তালিকায় আপনার অভিজ্ঞতার আইটেমগুলো সিলেক্ট করুন।</li>
-            <li>আপনার নাম ও ছবি দিয়ে রেজাল্ট জেনারেট করুন।</li>
-            <li>কার্ড ডাউনলোড বা সোশ্যাল মিডিয়ায় শেয়ার করুন!</li>
+            <li>তালিকায় আইটেমগুলো সিলেক্ট করুন।</li>
+            <li>নাম ও ছবি দিয়ে রেজাল্ট কার্ড তৈরি করুন।</li>
+            <li>কার্ড ডাউনলোড বা শেয়ার করুন!</li>
           </ol>
         </div>
       </div>
@@ -233,10 +232,9 @@
         <p>© <span id="current-year">2026</span> আমার বাংলা।</p>
         <p class="text-center font-medium"><span class="font-bold text-emerald-700">মেহেদী হাসান</span></p>
         <div class="flex items-center gap-4 font-medium">
-          <a href="#" onclick="alert('আমার বাংলা একটি বিনোদনমূলক ওয়েব প্রজেক্ট। এতে আপনার কোনো ব্যক্তিগত তথ্য সংরক্ষণ করা হয় না।'); return false;" class="hover:text-emerald-600 transition">প্রাইভেসি পলিসি</a>
+          <a href="#" onclick="alert('আমার বাংলা একটি বিনোদনমূলক ওয়েব প্রজেক্ট।'); return false;" class="hover:text-emerald-600 transition">প্রাইভেসি পলিসি</a>
         </div>
       </div>
-
     </div>
   </footer>
 
