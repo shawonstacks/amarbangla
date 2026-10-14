@@ -1,7 +1,6 @@
 let selectedItems = new Set();
 let uploadedPhotoDataUrl = null;
 
-// Safe fallback for all categories
 const safeFoods = typeof foodsData !== 'undefined' ? foodsData : { title: "ফুড", items: [], badges: [] };
 const safeNostalgia = typeof nostalgiaData !== 'undefined' ? nostalgiaData : { title: "নস্টালজিয়া", items: [], badges: [] };
 const safeCampus = typeof campusData !== 'undefined' ? campusData : { title: "স্কুল লাইফ", items: [], badges: [] };
@@ -29,16 +28,31 @@ function handlePhotoUpload(event) {
 
   const reader = new FileReader();
   reader.onload = function(e) {
-    uploadedPhotoDataUrl = e.target.result;
-    
-    const previewImg = document.getElementById('photo-preview-input');
-    const placeholderIcon = document.getElementById('photo-placeholder-icon');
-    
-    if (previewImg && placeholderIcon) {
-      previewImg.src = uploadedPhotoDataUrl;
-      previewImg.classList.remove('hidden');
-      placeholderIcon.classList.add('hidden');
-    }
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      let size = Math.min(img.width, img.height);
+      canvas.width = 300;
+      canvas.height = 300;
+      
+      let startX = (img.width - size) / 2;
+      let startY = (img.height - size) / 2;
+      
+      ctx.drawImage(img, startX, startY, size, size, 0, 0, 300, 300);
+      uploadedPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      
+      const previewImg = document.getElementById('photo-preview-input');
+      const placeholderIcon = document.getElementById('photo-placeholder-icon');
+      
+      if (previewImg && placeholderIcon) {
+        previewImg.src = uploadedPhotoDataUrl;
+        previewImg.classList.remove('hidden');
+        placeholderIcon.classList.add('hidden');
+      }
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
@@ -185,16 +199,16 @@ function generateResultCard() {
     }
   }
 
-  // Handle Photo Avatar Display (Hide completely if no uploaded photo)
+  // Handle Photo Avatar Background Display
   const avatarContainer = document.getElementById('card-avatar-container');
-  const cardUserPhoto = document.getElementById('card-user-photo');
+  const cardUserPhotoBg = document.getElementById('card-user-photo-bg');
 
-  if (uploadedPhotoDataUrl && avatarContainer && cardUserPhoto) {
-    cardUserPhoto.setAttribute('src', uploadedPhotoDataUrl);
+  if (uploadedPhotoDataUrl && avatarContainer && cardUserPhotoBg) {
+    cardUserPhotoBg.style.backgroundImage = `url('${uploadedPhotoDataUrl}')`;
     avatarContainer.style.setProperty('display', 'block', 'important');
   } else if (avatarContainer) {
     avatarContainer.style.setProperty('display', 'none', 'important');
-    if (cardUserPhoto) cardUserPhoto.removeAttribute('src');
+    if (cardUserPhotoBg) cardUserPhotoBg.style.backgroundImage = '';
   }
 
   const elUserName = document.getElementById('card-user-name');
@@ -232,66 +246,54 @@ function generateResultCard() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-async function downloadCardImage() {
+function downloadCardImage() {
   const cardElement = document.getElementById('shareable-card');
   if (!cardElement) return;
 
-  const cardUserPhoto = document.getElementById('card-user-photo');
+  const cardUserPhotoBg = document.getElementById('card-user-photo-bg');
   const avatarContainer = document.getElementById('card-avatar-container');
 
-  if (uploadedPhotoDataUrl && cardUserPhoto && avatarContainer) {
-    cardUserPhoto.src = uploadedPhotoDataUrl;
+  if (uploadedPhotoDataUrl && cardUserPhotoBg && avatarContainer) {
+    cardUserPhotoBg.style.backgroundImage = `url('${uploadedPhotoDataUrl}')`;
     avatarContainer.style.setProperty('display', 'block', 'important');
-
-    await new Promise((resolve) => {
-      if (cardUserPhoto.complete && cardUserPhoto.naturalWidth !== 0) {
-        resolve();
-      } else {
-        cardUserPhoto.onload = resolve;
-        cardUserPhoto.onerror = resolve;
-      }
-    });
-  } else if (avatarContainer) {
-    avatarContainer.style.setProperty('display', 'none', 'important');
   }
 
   window.scrollTo(0, 0);
 
-  html2canvas(cardElement, { 
-    scale: 3, 
-    useCORS: true,
-    allowTaint: true,
-    logging: false,
-    letterRendering: true,
-    backgroundColor: "#FAF9F6",
-    onclone: (clonedDoc) => {
-      const clonedCard = clonedDoc.getElementById('shareable-card');
-      const clonedPhoto = clonedDoc.getElementById('card-user-photo');
-      const clonedAvatarContainer = clonedDoc.getElementById('card-avatar-container');
+  setTimeout(() => {
+    html2canvas(cardElement, { 
+      scale: 3, 
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      letterRendering: true,
+      backgroundColor: "#FAF9F6",
+      onclone: (clonedDoc) => {
+        const clonedCard = clonedDoc.getElementById('shareable-card');
+        const clonedPhotoBg = clonedDoc.getElementById('card-user-photo-bg');
+        const clonedAvatarContainer = clonedDoc.getElementById('card-avatar-container');
 
-      if (clonedCard) {
-        clonedCard.style.maxWidth = '380px';
-        clonedCard.style.width = '100%';
-        clonedCard.style.marginLeft = 'auto';
-        clonedCard.style.marginRight = 'auto';
-        clonedCard.style.textAlign = 'center';
-        clonedCard.style.boxSizing = 'border-box';
-      }
+        if (clonedCard) {
+          clonedCard.style.maxWidth = '380px';
+          clonedCard.style.width = '100%';
+          clonedCard.style.marginLeft = 'auto';
+          clonedCard.style.marginRight = 'auto';
+          clonedCard.style.textAlign = 'center';
+          clonedCard.style.boxSizing = 'border-box';
+        }
 
-      if (uploadedPhotoDataUrl && clonedPhoto && clonedAvatarContainer) {
-        clonedAvatarContainer.style.setProperty('display', 'block', 'important');
-        clonedPhoto.setAttribute('src', uploadedPhotoDataUrl);
-      } else if (clonedAvatarContainer) {
-        clonedAvatarContainer.style.setProperty('display', 'none', 'important');
-        if (clonedPhoto) clonedPhoto.removeAttribute('src');
+        if (uploadedPhotoDataUrl && clonedPhotoBg && clonedAvatarContainer) {
+          clonedAvatarContainer.style.setProperty('display', 'block', 'important');
+          clonedPhotoBg.style.backgroundImage = `url('${uploadedPhotoDataUrl}')`;
+        }
       }
-    }
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.download = `my-amar-bangla-card.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  });
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = `my-amar-bangla-card.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }, 150);
 }
 
 function shareToFacebook() {
